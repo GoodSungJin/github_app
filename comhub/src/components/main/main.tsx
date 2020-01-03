@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { SectionTab } from './main-styled';
 
 const Main = () => {
 
   return (
-    <div>
-    </div>
+    <SectionTab>
+      wow
+    </SectionTab>
   )
 };
 

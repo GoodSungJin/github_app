@@ -1,8 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, ChangeEvent, FormEvent, KeyboardEvent } from 'react';
 import axios from 'axios';
+import { SectionHome, LiRepository } from './home-styled';
+import Main from './main/main';
 
 const Home = () => {
   const [list, setList] = useState([]);
+  const [userName, setUserName] = useState('goodsungjin');
 
   const commit = () => {
     // axios.get('https://api.github.com/repos/GoodSungjin/PortFolio/commits',
@@ -39,20 +42,45 @@ const Home = () => {
     // })
 
     // 레포
-    list.map((item: any) => {
-      console.log(item.name)
-      console.log(item.owner.login)
-    })
+    // list.map((item: any) => {
+    //   console.log(item.name)
+    //   console.log(item.owner.login)
+    // })
 
   }, [list])
 
+  const onChangeUserName = (e: FormEvent<HTMLInputElement>) => {
+    setUserName(e.currentTarget.value)
+  }
+
+  const onSubmitUserName = (e: FormEvent) => {
+    e.preventDefault();
+
+    axios.get(`https://api.github.com/users/${userName}/repos`)
+      .then(res => setList(res.data))
+      .catch(res => console.log('맞는 아이디가 없다'))
+  };
+
   return (
-    <div>
+    <SectionHome>
+      <form onSubmit={onSubmitUserName}>
+        <input type="text" onChange={onChangeUserName} />
+      </form>
       <button onClick={commit}>커밋확인</button>
       <button onClick={repo}>레포확인</button>
-      <ul>
+      <ul className="repo-list">
+        {
+          list.length > 0 && list.map((item: any) => {
+            return (
+              <LiRepository>
+                <span>{item.name}</span>
+              </LiRepository>
+            )
+          })
+        }
       </ul>
-    </div>
+      <Main></Main>
+    </SectionHome>
   )
 };
 
