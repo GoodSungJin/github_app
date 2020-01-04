@@ -10,11 +10,12 @@ export const SectionRepository = styled.section`
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+    padding: 45px;
   }
 `;
 
 export const LiRepository = styled.li`
-  /* margin-right: 50px; */
+  margin-right: 50px;
   margin-bottom: 50px;
   width: 80px;
   overflow: hidden;
