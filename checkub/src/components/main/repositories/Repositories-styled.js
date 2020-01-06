@@ -2,18 +2,23 @@ import styled from 'styled-components';
 import FolderImg from '../../../image/folder.png'
 
 export const SectionRepository = styled.section`
+  height: 85%;
+  width: 99%;
+  border: 1px solid #aaa;
+  border-radius: 3px;
+
   .repo-list {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: flex-start;
     padding: 45px;
   }
 `;
 
 export const LiRepository = styled.li`
-  margin-right: 50px;
-  margin-bottom: 50px;
-  width: 80px;
+  margin-right: 3%;
+  margin-bottom: 4%;
+  width: 7%;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -30,28 +35,7 @@ export const LiRepository = styled.li`
   
   span {
     font-size: 1.3rem;
+    line-height: 2rem;
     text-align: center;
-  }
-`;
-
-export const DivModalContainer = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.4);
-
-  .modal {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 70%;
-    height: 70%;
-    border: 1px solid black;
-    border-radius: 3px;
-    background-color: #fff;
-
   }
 `;

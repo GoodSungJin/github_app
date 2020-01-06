@@ -5,9 +5,10 @@ import axios from 'axios';
 
 import Input from './input/Input';
 import Repositories from './repositories/Repositories';
+import Profile from './profile/Profile';
 
 const Main = ({
-  repository, commit, name, setRepo, setCommit, setName
+  repository, commit, name, setRepo, setCommit, setName, userGithub, setUserGithub
 }) => {
   //   axios.get('https://api.github.com/repos/GoodSungjin/PortFolio/commits',
   //   { headers: {
@@ -22,11 +23,6 @@ const Main = ({
         setCommit(res.data.map(item => item.commit))
 
         console.log(res.data.map(item => item.commit))
-
-        // res.data.map(item => {
-        //   console.log(item.commit.committer);
-        //   console.log(item.commit.message);
-        // })
       })
   };
 
@@ -37,14 +33,21 @@ const Main = ({
   const onSubmitUserName = (e) => {
     e.preventDefault();
 
-    axios.get(`https://api.github.com/users/${name}/repos`)
-      .then(res => setRepo(res.data))
-      .catch(res => console.log('맞는 아이디가 없다'))
+    const promise1 = axios.get(`https://api.github.com/users/${name}/repos`);
+    const promise2 = axios.get(`https://api.github.com/users/${name}`);
+
+    Promise.all([promise1, promise2])
+      .then(res => {
+        setRepo(res[0].data);
+        setUserGithub(res[1].data);
+      })
+      .catch(res => console.error('맞는 아이디가 없다'))
   };
 
   useEffect(() => {
     console.log(repository)
-  }, [repository])
+    console.log(userGithub)
+  }, [userGithub])
 
   const onClickCloseModal = (e) => {
     if (!e.target.classList.contains('modal-wrapper')) return;
@@ -54,16 +57,21 @@ const Main = ({
 
   return (
     <MainContainer>
-      <Input
-        onChangeUserName={onChangeUserName}
-        onSubmitUserName={onSubmitUserName}
+      <Profile
+        userGithub={userGithub}
       />
-      <Repositories
-        repository={repository}
-        onClickSelectRepo={onClickSelectRepo}
-        commit={commit}
-        onClickCloseModal={onClickCloseModal}
-      />
+      <div className='contents-side'>
+        <Input
+          onChangeUserName={onChangeUserName}
+          onSubmitUserName={onSubmitUserName}
+        />
+        <Repositories
+          repository={repository}
+          onClickSelectRepo={onClickSelectRepo}
+          commit={commit}
+          onClickCloseModal={onClickCloseModal}
+        />
+      </div>
     </MainContainer>
   )
 };

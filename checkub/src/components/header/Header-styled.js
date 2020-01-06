@@ -1,7 +1,9 @@
 import styled from 'styled-components';
 
 export const HeaderConainer = styled.header`
-  height: 15vh;
-  width: 1250px;
+  height: 10vh;
+  width: 100vw;
   margin: 0 auto;
+
+  border: 1px solid black;
 `;

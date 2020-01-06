@@ -1,5 +1,6 @@
 import React from 'react';
-import { LiRepository, SectionRepository, DivModalContainer } from './Repositories-styled';
+import { LiRepository, SectionRepository } from './Repositories-styled';
+import CommitModal from './commit-modal/Commit-modal';
 
 const Repositories = ({ repository, onClickSelectRepo, commit, onClickCloseModal }) => {
   return (
@@ -13,31 +14,7 @@ const Repositories = ({ repository, onClickSelectRepo, commit, onClickCloseModal
           )
         })}
       </ul>
-      {
-        commit.length > 0 && 
-        <DivModalContainer onClick={onClickCloseModal} className="modal-wrapper">
-          <div className="modal">
-            <table>
-              <thead>
-                <tr>
-                  <th>Commit</th>
-                  <th>Name</th>
-                  <th>Date</th>
-                </tr>
-              </thead>
-              <tbody>
-                {commit.map(item => (
-                  <tr>
-                    <td>{item.message}</td>
-                    <td>{item.committer.name}</td>
-                    <td>{item.committer.date}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </DivModalContainer>
-      }
+      <CommitModal commit={commit} onClickCloseModal={onClickCloseModal} />
     </SectionRepository>
   )
 };

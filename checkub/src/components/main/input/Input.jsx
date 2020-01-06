@@ -6,7 +6,8 @@ const Input = ({ onChangeUserName, onSubmitUserName }) => {
 
   return (
     <Form onSubmit={onSubmitUserName} className="contain">
-      <input type="text" onChange={onChangeUserName} placeholder="Write Your Nickname!!" />
+      <span>Write Your Nickname</span>
+      <input type="text" onChange={onChangeUserName} placeholder="Enter!!" />
     </Form>
   )
 };
