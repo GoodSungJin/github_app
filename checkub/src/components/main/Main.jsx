@@ -33,7 +33,7 @@ const Main = ({
   const onSubmitUserName = (e) => {
     e.preventDefault();
 
-    const promise1 = axios.get(`https://api.github.com/users/${name}/repos`);
+    const promise1 = axios.get(`https://api.github.com/users/${name}/repos?per_page=100`);
     const promise2 = axios.get(`https://api.github.com/users/${name}`);
 
     Promise.all([promise1, promise2])

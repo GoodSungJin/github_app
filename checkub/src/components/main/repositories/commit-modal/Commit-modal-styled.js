@@ -21,13 +21,18 @@ export const DivModalContainer = styled.div`
     background-color: #fff;
     padding: 2rem 3rem;
 
+    overflow: auto;
+
     h1 {
       font-size: 5rem;
     }
 
     table {
       width: 100%;
+      /* height: 85%; */
       margin-top: 3rem;
+      overflow: auto;
+      /* display: inline-block; */
 
       thead {
         font-size: 3rem;
